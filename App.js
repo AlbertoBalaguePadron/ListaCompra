@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import ProductInput from "./components/ProductInput";
+import ListItem from "./components/ListItem";
 
 export default function App() {
   const [products, setProducts] = useState([]);
@@ -12,6 +13,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <ProductInput onProductAdd={addProductHandler} />
+      <ListItem productData={products} />
     </View>
   );
 }

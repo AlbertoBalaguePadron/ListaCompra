@@ -3,8 +3,6 @@ import { Button, StyleSheet, TextInput, View } from 'react-native';
 import NumericInput from 'react-native-numeric-input';
 import SelectDropdown from 'react-native-select-dropdown'
 
-
-
 const ProductInput = ({onProductAdd}) => {
 
     const dataDesplegable =["Fruit", "Vegetable", "Bakery", "Fish", "Meat"]
@@ -34,9 +32,6 @@ const ProductInput = ({onProductAdd}) => {
             setQuantity(0); 
             setProductName(''); 
     }
-
-
-    
 
     return (
         <View style={ styles.containerProcut }>
