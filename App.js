@@ -1,11 +1,17 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { useState } from "react";
+import { StyleSheet, View } from "react-native";
+import ProductInput from "./components/ProductInput";
 
 export default function App() {
+  const [products, setProducts] = useState([]);
+
+  const addProductHandler = (productName, type, quantity) => {
+    setProducts(() => [...products, productName, type, quantity]);
+    console.log(productName, type, quantity);
+  };
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <ProductInput onProductAdd={addProductHandler} />
     </View>
   );
 }
@@ -13,8 +19,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#3f5e5a",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
