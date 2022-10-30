@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { Button, StyleSheet, TextInput, View } from 'react-native';
 import NumericInput from 'react-native-numeric-input';
-import SelectDropdown from 'react-native-select-dropdown'
+import SelectDropdown from 'react-native-select-dropdown';
+import uuid from 'react-native-uuid';
+
 
 const ProductInput = ({onProductAdd}) => {
 
@@ -24,12 +26,12 @@ const ProductInput = ({onProductAdd}) => {
  
     const addProductHandler = () => {
         const sanitizedName = productName.trim(); 
-            
+        const clave = uuid.v4();
         if (sanitizedName != ''){
-            onProductAdd(sanitizedName, type, quantity);
+            onProductAdd(sanitizedName, quantity, type, clave);
         }
             setType(''); 
-            setQuantity(0); 
+            setQuantity(1); 
             setProductName(''); 
     }
 
@@ -64,11 +66,13 @@ const ProductInput = ({onProductAdd}) => {
                     borderColor={"#8f1f78"}
                     totalHeight={40}
                     totalWidth={50} 
-                    maxValue={10} 
+                    maxValue={30}
+                    minValue={1}
+                    editable={false}
                     rightButtonBackgroundColor='#8f1f78' 
                     leftButtonBackgroundColor='#8f1f78'
                     onChange={changeQuantity}
-                    color='white'
+                    color='black'
                     value={ quantity }
                     />
                 <Button title="Añadir" onPress={addProductHandler} />
@@ -86,6 +90,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 100,
         padding: 10,
+        marginTop: 30, 
     },
     product: {
         flex: 1,

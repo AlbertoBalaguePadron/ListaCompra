@@ -1,19 +1,34 @@
 import { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import ProductInput from "./components/ProductInput";
 import ListItem from "./components/ListItem";
 
 export default function App() {
   const [products, setProducts] = useState([]);
 
-  const addProductHandler = (productName, type, quantity) => {
-    setProducts(() => [...products, productName, type, quantity]);
-    console.log(productName, type, quantity);
+  const addProductHandler = (sanitizedName, quantity, type, clave) => {
+    const MiProduct = {
+      id: clave,
+      name: sanitizedName,
+      quantity: quantity,
+      bought: null,
+      type: type,
+    };
+
+    setProducts(() => [...products, MiProduct]);
   };
+
   return (
     <View style={styles.container}>
       <ProductInput onProductAdd={addProductHandler} />
-      <ListItem productData={products} />
+
+      {!products.length ? (
+        <Text>No hay productos introducidos </Text>
+      ) : (
+        products.map((product, idx) => (
+          <ListItem key={idx + product.id} product={Object.values(product)} />
+        ))
+      )}
     </View>
   );
 }
@@ -21,8 +36,9 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#3f5e5a",
     alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: "#3f5e5a",
+    justifyContent: "flex-start",
+    width: "100%",
   },
 });
