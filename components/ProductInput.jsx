@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
         height: 100,
         padding: 10,
         marginTop: 30, 
+        marginBottom: 30,
     },
     product: {
         flex: 1,
