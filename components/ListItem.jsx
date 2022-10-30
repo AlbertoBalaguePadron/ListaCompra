@@ -1,12 +1,16 @@
+import { useState } from "react";
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 // onProductRemove
 const ListItem = ({product}) => {
+
+    const [estilo, setestilo] = useState(false);
 
     let id = product[0];
     let name = product[1]; 
     let quantity = product[2]; 
     let shoop = product[3];
     let type = product[4];
+
 
     let TextoMostrar = quantity + " X " + name
 
@@ -38,8 +42,17 @@ const ListItem = ({product}) => {
     }
 
     return (
+
+        estilo == true ?
+            <View style={styles.listItemsComprado}>
+                <Pressable style={{flexDirection: "row", alignItems: "center"}}  onPress={ () => setestilo(false) }>
+                    {ImAutoSelection(type)}
+                    <Text style={styles.productTachado} >{TextoMostrar}</Text>
+                </Pressable>
+            </View>
+        : 
         <View style={styles.listItems}>
-                <Pressable id="memo" style={{flexDirection: "row", alignItems: "center"}}>
+                <Pressable style={{flexDirection: "row", alignItems: "center"}} onPress={ () => setestilo(true)}>
                     {ImAutoSelection(type)}
                     <Text style={styles.product} >{TextoMostrar}</Text>
                 </Pressable>
@@ -55,6 +68,17 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         backgroundColor: 'white',
+        borderRadius: 5,
+        width: "100%",
+        marginBottom: 5,
+        paddingHorizontal: 5
+    },
+    listItemsComprado: {
+        flexDirection: 'row',
+        alignItems: "center",
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        backgroundColor: '#A8A8A8',
         borderRadius: 5,
         width: "100%",
         marginBottom: 5,

@@ -7,9 +7,6 @@ export default function App() {
   const [products, setProducts] = useState([]);
 
   const addProductHandler = (sanitizedName, quantity, type, clave) => {
-
-    const 
-
     const MiProduct = {
       id: clave,
       name: sanitizedName,
